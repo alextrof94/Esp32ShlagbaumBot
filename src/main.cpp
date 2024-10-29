@@ -367,20 +367,33 @@ void handleRoot(AsyncWebServerRequest *request) {
     </html>)rawliteral");
 }
 
-void handleSave(AsyncWebServerRequest *request) {
+void handleSave(AsyncWebServerRequest *request) 
+{
   if (request->hasParam("ssid") && request->hasParam("pass") && request->hasParam("token") && request->hasParam("log")) {
     String inputSSID = request->getParam("ssid")->value();
     String inputPassword = request->getParam("pass")->value();
     String inputToken = request->getParam("token")->value();
     String inputChatLogId = request->getParam("log")->value();
 
-    preferences.putString("ssid", inputSSID);
-    preferences.putString("pass", inputPassword);
-    preferences.putString("token", inputToken);
-    preferences.putString("logChatId", inputChatLogId);
+    if (inputSSID != "")
+    {
+      preferences.putString("ssid", inputSSID);
+    }
+    if (inputSSID != "")
+    {
+      preferences.putString("pass", inputPassword);
+    }
+    if (inputSSID != "")
+    {
+      preferences.putString("token", inputToken);
+    }
+    if (inputSSID != "")
+    {
+      preferences.putString("logChatId", inputChatLogId);
+    }
     preferences.end();
 
-    request->send(200, "text/html", "Сохранено. Перезапуск...");
+    request->send(200, "text/html", "Saved. Reboot...");
     delay(2000);
     ESP.restart();
   } else {
