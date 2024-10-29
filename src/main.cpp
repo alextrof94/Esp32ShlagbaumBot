@@ -379,15 +379,15 @@ void handleSave(AsyncWebServerRequest *request)
     {
       preferences.putString("ssid", inputSSID);
     }
-    if (inputSSID != "")
+    if (inputPassword != "")
     {
       preferences.putString("pass", inputPassword);
     }
-    if (inputSSID != "")
+    if (inputToken != "")
     {
       preferences.putString("token", inputToken);
     }
-    if (inputSSID != "")
+    if (inputChatLogId != "")
     {
       preferences.putString("logChatId", inputChatLogId);
     }
@@ -397,7 +397,7 @@ void handleSave(AsyncWebServerRequest *request)
     delay(2000);
     ESP.restart();
   } else {
-    request->send(200, "text/html", "Отсутствуют параметры");
+    request->send(200, "text/html", "Empty parameters");
   }
 }
 
